@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kas Masuk Kas Keluar - Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link" href="/daftar-akun">Daftar Akun</a>
+            <a class="nav-link" href="/kas-masuk">Kas Masuk</a>
+            <a class="nav-link" href="/kas-keluar">Kas Keluar</a>
+            <a class="nav-link" href="/laporan">Laporan</a>
+            <a class="nav-link" href="/akun">Akun</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid py-3">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>KAS KELUAR</h6>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addakun">Tambah</button>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-3">
+                <table class="table align-items-center mb-0 table-striped" id="table">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Tanggal</th>
+                      <th>No Bukti</th>
+                      <th>Diterima Dari</th>
+                      <th>Untuk Keperluan</th>
+                      <th>Jumlah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each results}}
+                    <tr>
+                      <td>{{ inc @index }}</td>
+                      <td>{{ formatDate tgl }}</td>
+                      <td>{{ no_bukti }}</td>
+                      <td>{{ tujuan }}</td>
+                      <td>{{ no_akun}} - {{nm_akun}}</td>
+                      <td>{{ formatRupiah kas_keluar }}</td>
+                    </tr>
+                    <form action="/editakun/{{id_akun}}" method="post">
+                      <div class="modal fade" id="EditModal-{{ id_akun }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <input type="text" name="no_akun" class="form-control" placeholder="No Akun" value="{{ no_akun }}">
+                              </div>
+                              <div class="form-group">
+                                <input type="text" name="nm_akun" class="form-control" placeholder="Nama Akun" value="{{ nm_akun }}">
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal untuk menambahkan akun -->
+    <div class="modal fade" id="addakun" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Tambah Akun</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="/addKaskeluar" method="post">
+              <div class="form-group">
+                <table width="100%">
+                  <tr>
+                    <td width="50%">No. Bukti</td>
+                    <td width="50%"><input type="text" name="no_bukti" class="form-control" value="{{buktiNumber}}" readonly></td>
+                  </tr>
+                  <tr>
+                    <td width="50%"> Tanggal </td>
+                    <td width="50%"><input type="date" name="tgl" class="form-control" required></td>
+                  </tr>
+                  <tr>
+                    <td width="50%"> Untuk Keperluan </td>
+                    <td width="50%">
+                      <select name="no_akun" class="form-control">
+                        {{#each options}}
+                        <option value="{{no_akun}}">{{no_akun}} - {{nm_akun}}</option>
+                        {{/each}}
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="50%"> Diterima Dari </td>
+                    <td width="50%"><input type="text" name="tujuan" class="form-control" placeholder="Jumlah" required></td>
+                  </tr>
+                  <tr>
+                    <td width="50%"> Uang Sejumlah </td>
+                    <td width="50%"><input type="number" name="jumlah" class="form-control" placeholder="Jumlah" required></td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/assets/js/jquery-3.6.4.js"></script>
+  <script src="/assets/js/bootstrap.js"></script>
+</body>
+</html>

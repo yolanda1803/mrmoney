@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mr. Money - Dashboard</title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.css">
+</head>
+<body>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <h3 class = "text-secondary font-weight-bold float-left logo"> Dana Kas Kecil</h3>
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link" href="/daftar-akun">Daftar Akun</a>
+            <a class="nav-link" href="/kas-masuk">Kas Masuk</a>
+            <a class="nav-link" href="/kas-keluar">Kas Keluar</a>
+            <a class="nav-link" href="/laporan">Laporan</a>
+            <a class="nav-link" href="/akun">Akun</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+      <div class="col-md-12">
+        <!-- Content -->
+        <br/>
+        <h1>Dashboard</h1>
+        <br/>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saldo Keluar</h5>
+            <p class="card-text">{{ formatRupiah saldoKeluar }}</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Saldo Masuk</h5>
+            <p class="card-text">{{ formatRupiah saldoMasuk }}</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Saldo</h5>
+            <p class="card-text">{{ formatRupiah totalSaldo }}</p>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="/assets/js/jquery-3.6.4.js"></script>
+  <script src="/assets/js/bootstrap.js"></script>
+</body>
+</html>
